@@ -70,7 +70,7 @@ def delete_card(card_id):
     if card:
         # check whether the user is an admin or not
         is_admin = authorise_as_admin()
-        if not is_admin or str(card.user_id) != get_jwt_identity():
+        if not is_admin and str(card.user_id) != get_jwt_identity():
             return {"error": "User is not authorised to perform this action."}, 403
         # delete the card
         db.session.delete(card)
